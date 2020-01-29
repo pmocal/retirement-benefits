@@ -29,6 +29,7 @@ hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 var User = require('./models/user');
 var user_controller = require('./controllers/userController');
+var userRouter = require('./routes/userRouter');
 
 passport.use(
 	new LocalStrategy((username, password, done) => {
@@ -85,6 +86,8 @@ app.post(
 );
 
 app.get("/log-out", user_controller.log_out);
+
+app.use('/user', userRouter);
 
 app.use(logger('dev'));
 app.use(express.json());

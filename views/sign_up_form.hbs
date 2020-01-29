@@ -7,6 +7,14 @@
 			<div class="col23 row234">
 				{{#if user}}
 					<p>
+						<label for="fullname">Full Name</label>
+						<input name="fullname" placeholder="Full Name" type="text" />
+					</p>
+					<p>
+						<label for="ssn">SSN</label>
+						<input name="ssn" placeholder="SSN" type="password" />
+					</p>
+					<p>
 						<label for="username">Username</label>
 						<input name="username" placeholder="username" type="text" value="{{user.username}}" />
 					</p>
@@ -18,11 +26,15 @@
 						<label for="passwordConfirmation">Password confirmation</label>
 						<input name="passwordConfirmation" placeholder="password" type="password" />
 					</p>
-					<p>
-						<label for="codename">Codename</label>
-						<input name="codename" placeholder="codename" type="text" />
-					</p>
 				{{else}}
+					<p>
+						<label for="fullname">Full Name</label>
+						<input name="fullname" placeholder="Full Name" type="text" />
+					</p>
+					<p>
+						<label for="ssn">SSN</label>
+						<input name="ssn" placeholder="SSN" type="password" />
+					</p>
 					<p>
 						<label for="username">Username</label>
 						<input name="username" placeholder="username" type="text" />
@@ -34,10 +46,6 @@
 					<p>
 						<label for="passwordConfirmation">Password confirmation</label>
 						<input name="passwordConfirmation" placeholder="password" type="password" />
-					</p>
-					<p>
-						<label for="codename">Codename</label>
-						<input name="codename" placeholder="codename" type="text" />
 					</p>
 				{{/if}}
 			</div>

@@ -2,35 +2,46 @@ var User = require('../models/user');
 const { check,validationResult } = require('express-validator');
 const { sanitizeBody } = require('express-validator');
 const bcrypt = require("bcryptjs");
+var path = require('path');
 
 exports.index = (req, res) => { 
-	res.render("index", { user: req.user, title: "Manhattan Gemological Appraisals" });
+	res.render("index", { user: req.user, title: "AFS Retirement Benefits" });
+};
+
+//display profile page for a specific user
+exports.user_profile_get = function(req, res, next) {
+	User.findById(req.params.id)
+		.exec(function(err, user) {
+			if (err) {
+				return next(err);
+			}
+			res.render('user_profile', { title: 'User Profile', user: user });
+		})
 };
 
 exports.sign_up_get = (req, res) => res.render("sign_up_form", { title: "Sign up" });
 
 exports.sign_up_post = [
 	// Validate fields.
-	check('codename', 'Enter codename to create a user.').isLength({min: 1}).trim(),
+	check('fullname', 'Full name must not be empty.').isLength({ min: 1 }).trim(),
+	check('SSN', 'SSN must be at least 9 digits').isLength({ min: 9 }).trim(),
 	check('username', 'Username must not be empty.').isLength({ min: 1 }).trim(),
 	check('password', 'Password must not be empty').isLength({ min: 1 }).trim(),
 	check('passwordConfirmation').exists(),
-
 	// Sanitize fields (using wildcard).
-	sanitizeBody('codename').escape(),
+	sanitizeBody('fullname').escape(),
+	sanitizeBody('SSN').escape(),
 	sanitizeBody('username').escape(),
 	sanitizeBody('password').escape(),
 	sanitizeBody('passwordConfirmation').escape(),
 	check('passwordConfirmation', 'passwordConfirmation field must have the same value as the password field')
 	    .exists()
 	    .custom((value, { req }) => value === req.body.password),
-	check('codename', 'codename field must be correct to create a user')
-		.exists()
-		.custom((value, { req }) => value === process.env.SIGNUP_PASS),
 	(req, res, next) => {
 		// Extract the validation errors from a request.
 		var user = new User({
 			username: req.body.username,
+			fullname: req.body.fullname
 		})
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
@@ -44,6 +55,8 @@ exports.sign_up_post = [
 				bcrypt.hash(req.body.password, salt, function(err, hash) {
 					user = new User({
 						username: req.body.username,
+						fullname: req.body.fullname,
+						ssn: req.body.ssn,
 						password: hash,
 					}).save(err => {
 						if (err) { 
