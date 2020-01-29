@@ -24,7 +24,7 @@ exports.sign_up_get = (req, res) => res.render("sign_up_form", { title: "Sign up
 exports.sign_up_post = [
 	// Validate fields.
 	check('fullname', 'Full name must not be empty.').isLength({ min: 1 }).trim(),
-	check('SSN', 'SSN must be at least 9 digits').isLength({ min: 9 }).trim(),
+	check('ssn', 'SSN must be at least 9 digits').isLength({ min: 9 }).trim(),
 	check('username', 'Username must not be empty.').isLength({ min: 1 }).trim(),
 	check('password', 'Password must not be empty').isLength({ min: 1 }).trim(),
 	check('passwordConfirmation').exists(),

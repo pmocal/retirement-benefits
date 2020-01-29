@@ -2,10 +2,12 @@
 	<div class="col12 row1">
 		<h1>User Profile for {{user.username}}</h1>
 	</div>
-		<div class="col23 row234">
-			<p>Full name: {{user.fullname}}</p>
-		</div>
-		<div class="col4 row1">
-			<a href="/log-out">Log Out</a>
-		</div>
+	<div class="col23 row234">
+		<p>Full name: {{user.fullname}}</p>
+		<p>SSN: {{user.ssn}}</p>
+	</div>
+	<div class="col4 row1">
+		<a href="/log-out">Log Out</a>
+	</div>
+	{{> back_link}}
 </body>
