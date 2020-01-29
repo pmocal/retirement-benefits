@@ -2,7 +2,6 @@ var User = require('../models/user');
 const { check,validationResult } = require('express-validator');
 const { sanitizeBody } = require('express-validator');
 const bcrypt = require("bcryptjs");
-var ensureAuthentication = require('../util/ensureAuthentication');
 var path = require('path');
 
 exports.index = (req, res) => { 
@@ -10,7 +9,7 @@ exports.index = (req, res) => {
 };
 
 //display profile page for a specific user
-exports.user_profile_get = [ensureAuthentication.ensureAuthenticated, function(req, res, next) {
+exports.user_profile_get = function(req, res, next) {
 	User.findById(req.params.id)
 		.exec(function(err, user) {
 			if (err) {
@@ -18,7 +17,7 @@ exports.user_profile_get = [ensureAuthentication.ensureAuthenticated, function(r
 			}
 			res.render('user_profile', { title: 'User Profile', user: user });
 		})
-}];
+};
 
 exports.sign_up_get = (req, res) => res.render("sign_up_form", { title: "Sign up" });
 
