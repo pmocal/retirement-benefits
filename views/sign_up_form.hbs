@@ -1,0 +1,59 @@
+<body>
+	<div class="col12 row1">
+		<h1>{{title}}</h1>
+	</div>
+	<div class="col23 row2345">
+		<form action="" method="POST">
+			<div class="col23 row234">
+				{{#if user}}
+					<p>
+						<label for="username">Username</label>
+						<input name="username" placeholder="username" type="text" value="{{user.username}}" />
+					</p>
+					<p>
+						<label for="password">Password</label>
+						<input name="password" placeholder="password" type="password" />
+					</p>
+					<p>
+						<label for="passwordConfirmation">Password confirmation</label>
+						<input name="passwordConfirmation" placeholder="password" type="password" />
+					</p>
+					<p>
+						<label for="codename">Codename</label>
+						<input name="codename" placeholder="codename" type="text" />
+					</p>
+				{{else}}
+					<p>
+						<label for="username">Username</label>
+						<input name="username" placeholder="username" type="text" />
+					</p>
+					<p>
+						<label for="password">Password</label>
+						<input name="password" placeholder="password" type="password" />
+					</p>
+					<p>
+						<label for="passwordConfirmation">Password confirmation</label>
+						<input name="passwordConfirmation" placeholder="password" type="password" />
+					</p>
+					<p>
+						<label for="codename">Codename</label>
+						<input name="codename" placeholder="codename" type="text" />
+					</p>
+				{{/if}}
+			</div>
+			<div class="col23 row5 form">
+				<button>Sign Up</button>
+			</div>
+		</form>
+	</div>
+	<div class="col4 row1">
+		<a href="/">Log in</a>
+	</div>
+	{{#if errors}}
+		<ul>
+			{{#each errors}}
+				<li>{{this.msg}}</li>
+			{{/each}}
+		</ul>
+	{{/if}}
+</body>
