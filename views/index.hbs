@@ -1,21 +1,30 @@
 <body>
 	{{#if user}}
-		<div class="col12 row1">
-			<h1>Welcome {{user.username}}</h1>
+		<div class="col1 row1">
+			<a href="/">Home</a>
 		</div>
-		<div class="col23 row234">
-			<a href="/user/{{user.id}}">My Profile</a>
+		<div class="col23 row1">
+			<h1>AFS Retirement Benefits</h1>
 		</div>
 		<div class="col4 row1">
+			<a href="/user/{{user.id}}">My Profile</a>
+		</div>
+
+		<div class="col1 row2">
+			<p>Welcome <span>{{user.username}}</span></p>
 			<a href="/log-out">Log Out</a>
 		</div>
 	{{else}}
-		<div class="col12 row1">
-			<h1>Log In</h1>
+		<div class="col1 row1">
+			<a href="/">Home</a>
+		</div>
+		<div class="col23 row1">
+			<h1>AFS Retirement Benefits</h1>
 		</div>
 		<div class="col23 row2345">
 			<form action="/log-in" method="POST">
 				<div class="col23 row234">
+					<h2>Log In</h2>
 					<p>
 						<label for="username">Username</label>
 						<input name="username" placeholder="username" type="text" />

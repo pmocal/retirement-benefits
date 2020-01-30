@@ -1,6 +1,6 @@
 html, body {
 	height: 100%;
-	font-size: 1.4em;
+	font-size: 1.3em;
 	margin: 0%;
 	padding: 0%;
 	background-color: gainsboro;
@@ -20,7 +20,7 @@ body {
 }
 
 h1 {
-	font-size: 1.7em;
+	font-size: 1.6em;
 	color: black;
 	font-weight: bold;
 }
@@ -55,6 +55,10 @@ form button {
 pre {
 	font-size: 0.5em;
 	white-space: pre-wrap;
+}
+
+span {
+	color: royalblue;
 }
 
 .col12 {
