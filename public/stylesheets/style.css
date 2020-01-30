@@ -1,8 +1,8 @@
 html, body {
 	height: 100%;
-	font-size: 1.3em;
-	margin: 1%;
-	padding: 1%;
+	font-size: 1.2em;
+	margin: 0;
+	padding: 0;
 	background-color: gainsboro;
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -26,36 +26,13 @@ h1 {
 }
 
 h2 {
-	font-size: 1.5em;
+	font-size: 1.4em;
 	color: #2c3e50;
 	font-weight: bold;
 }
 
-form {
-	display: table;
-	width: 100%;
-	text-align: right;
-	font-size: 0.5em;
-}
-
-form label {
-	text-align: left;
-	width: 50%;
-}
-
-form input {
-	width: 50%;
-}
-
-form select {
-	width: 50%;
-}
-
-form button {
-	margin-top: 2%;
-	font-size: 0.8em;
-	width: auto;
-	min-width: 30%;
+a, p {
+	padding: 1%;
 }
 
 pre {
@@ -67,117 +44,35 @@ span {
 	color: royalblue;
 }
 
-.col12 {
-	grid-column-start: 1;
-	grid-column-end: 3;
+form {
+	display: table;
+	width: 100%;
+	text-align: right;
+	font-size: 0.8em;
+	padding: 1%;
 }
 
-.col123 {
-	grid-column-start: 1;
-	grid-column-end: 4;
+form * {
+	padding: 0.3%;
+	margin: 0.3%;
 }
 
-.col1234 {
-	grid-column-start: 1;
-	grid-column-end: 5;
+form label {
+	text-align: left;
+	width: 40%;
 }
 
-.col12345 {
-	grid-column-start: 1;
-	grid-column-end: 6;
+form input, select {
+	width: 60%;
 }
 
-.col2 {
-	grid-column-start: 2;
-	grid-column-end: 3;
+form button {
+	margin-top: 2%;
+	font-size: 0.8em;
+	width: auto;
+	min-width: 30%;
 }
 
-.col23 {
-	grid-column-start: 2;
-	grid-column-end: 4;
-}
-
-.col234 {
-	grid-column-start: 2;
-	grid-column-end: 5;
-}
-
-.col2345 {
-	grid-column-start: 2;
-	grid-column-end: 6;
-}
-
-.col3 {
-	grid-column-start: 3;
-	grid-column-end: 4;
-}
-
-.col34 {
-	grid-column-start: 3;
-	grid-column-end: 5;
-}
-
-.col345 {
-	grid-column-start: 3;
-	grid-column-end: 6;
-}
-
-.col4 {
-	grid-column-start: 4;
-	grid-column-end: 5;
-}
-
-.col45 {
-	grid-column-start: 4;
-	grid-column-end: 6;
-}
-
-.col5 {
-	grid-column-start: 5;
-	grid-column-end: 6;
-}
-
-.row1 {
-	grid-row-start: 1;
-	grid-row-end: 2;
-}
-
-.row12 {
-	grid-row-start: 1;
-	grid-row-end: 3;
-}
-
-.row2 {
-	grid-row-start: 2;
-	grid-row-end: 3;
-}
-
-.row23 {
-	grid-row-start: 2;
-	grid-row-end: 4;
-}
-
-.row234 {
-	grid-row-start: 2;
-	grid-row-end: 5;
-}
-
-.row2345 {
-	grid-row-start: 2;
-	grid-row-end: 6;
-}
-
-.row345 {
-	grid-row-start: 3;
-	grid-row-end: 6;
-}
-
-.row4 {
-	grid-row-start: 4;
-	grid-row-end: 5;
-}
-
-.row5 {
-	grid-row-start: 5;
-	grid-row-end: 6;
+.form {
+	text-align: center;
 }

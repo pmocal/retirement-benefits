@@ -1,12 +1,11 @@
 <body>
 	{{> home_link}}
 	{{> header}}
-	<div class="col1 row2">
-		<p>Welcome <span>{{user.username}}</span></p>
-		<a href="/log-out">Log Out</a>
+	{{> sideprofile_menu}}
+	<div class="col23 row2">
+		<h2>{{title}}</h2>
 	</div>
-	<div class="col23 row234">
-		<h2>User Profile for {{user.username}}</h2>
+	<div class="col23 row345">
 		<p>Last name: {{user.last_name}}</p>
 		<p>First name: {{user.first_name}}</p>
 		<p>Address: {{user.address}}</p>

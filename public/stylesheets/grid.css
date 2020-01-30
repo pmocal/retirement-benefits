@@ -98,6 +98,11 @@
 	grid-row-end: 6;
 }
 
+.row34 {
+	grid-row-start: 3;
+	grid-row-end: 5;
+}
+
 .row345 {
 	grid-row-start: 3;
 	grid-row-end: 6;
