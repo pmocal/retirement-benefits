@@ -50,7 +50,7 @@ exports.sign_up_post = [
 	check('passwordConfirmation', 'passwordConfirmation field must have the same value as the password field')
 	    .exists()
 	    .custom((value, { req }) => value === req.body.password),
-	(req, res, next) => {
+	async (req, res, next) => {
 		// Extract the validation errors from a request.
 		var user = new User({
 			last_name: req.body.last_name,
@@ -66,6 +66,9 @@ exports.sign_up_post = [
 			// There are errors. Render form again with sanitized values/error messages.
 			res.render('sign_up_form', { title: "Sign Up", user: user, errors: errors.array() });
 			// , { title: 'Create Item', item: item, errors: errors.array() });
+		}
+		else if (await User.exists({ssn: req.body.ssn})) {
+			res.render('sign_up_form', { title: "Sign Up", user: user, errors: [{'msg': 'SSN already exists among Users'}] });
 		}
 		else {
 			// Data from form is valid. Save book.
