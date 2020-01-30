@@ -3,8 +3,15 @@
 		<h1>User Profile for {{user.username}}</h1>
 	</div>
 	<div class="col23 row234">
-		<p>Full name: {{user.fullname}}</p>
-		<p>SSN: {{user.ssn}}</p>
+		<p>Last name: {{user.last_name}}</p>
+		<p>First name: {{user.first_name}}</p>
+		<p>Address: {{user.address}}</p>
+		<p>City: {{user.city}}</p>
+		<p>State: {{user.state}}</p>
+		<p>SSN: {{user.ssn_formatted}}</p>
+		<p>Sex: {{user.sex}}</p>
+		<p>Date of Birth: {{user.dob_formatted}}</p>
+		<p>Phone Number: {{user.phone_number_formatted}}</p>
 	</div>
 	<div class="col4 row1">
 		<a href="/log-out">Log Out</a>

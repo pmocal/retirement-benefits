@@ -6,47 +6,111 @@
 		<form action="" method="POST">
 			<div class="col23 row234">
 				{{#if user}}
-					<p>
-						<label for="fullname">Full Name</label>
-						<input name="fullname" placeholder="Full Name" type="text" value="{{user.fullname}}" />
-					</p>
-					<p>
+					<div>
+						<label for="last_name">Last Name</label>
+						<input name="last_name" placeholder="Last Name" type="text" value="{{user.last_name}}" />
+					</div>
+					<div>
+						<label for="first_name">First Name</label>
+						<input name="first_name" placeholder="First Name" type="text" value="{{user.first_name}}" />
+					</div>
+					<div>
+						<label for="address">Address</label>
+						<input name="address" placeholder="Address" type="text" value="{{user.address}}" />
+					</div>
+					<div>
+						<label for="city">City</label>
+						<input name="city" placeholder="City" type="text" value="{{user.city}}" />
+					</div>
+					<div>
+						<label for="state">State</label>
+						<input name="state" placeholder="State" type="text" value="{{user.state}}" />
+					</div>
+					<div>
 						<label for="ssn">SSN</label>
-						<input name="ssn" placeholder="SSN" type="password" value="{{user.ssn}}" />
-					</p>
-					<p>
+						<input name="ssn" placeholder="Enter as digits, no dashes" type="password" value="{{user.ssn}}" />
+					</div>
+					<div>
+						<label for="sex">Sex:</label>
+						<select id="sex" type="select" placeholder="Select sex" name="sex" required="true" >
+							<option value="male">male</option>
+							<option value="female">female</option>
+							<option value="other">other</option>
+						</select>
+					</div>
+					<div>
+						<label for="dob">Date of Birth</label>
+						<input name="dob" type="date"/>
+					</div>
+					<div>
+						<label for="phone_number">Telephone Number</label>
+						<input name="phone_number" placeholder="Enter as digits, no dashes" type="text" value="{{user.phone_number}}" />
+					</div>
+					<div>
 						<label for="username">Username</label>
-						<input name="username" placeholder="username" type="text" value="{{user.username}}" />
-					</p>
-					<p>
+						<input name="username" placeholder="username" type="text" value="{{user.username}}"/>
+					</div>
+					<div>
 						<label for="password">Password</label>
 						<input name="password" placeholder="password" type="password" />
-					</p>
-					<p>
+					</div>
+					<div>
 						<label for="passwordConfirmation">Password confirmation</label>
 						<input name="passwordConfirmation" placeholder="password" type="password" />
-					</p>
+					</div>
 				{{else}}
-					<p>
-						<label for="fullname">Full Name</label>
-						<input name="fullname" placeholder="Full Name" type="text" />
-					</p>
-					<p>
+					<div>
+						<label for="last_name">Last Name</label>
+						<input name="last_name" placeholder="Last Name" type="text" />
+					</div>
+					<div>
+						<label for="first_name">First Name</label>
+						<input name="first_name" placeholder="First Name" type="text" />
+					</div>
+					<div>
+						<label for="address">Address</label>
+						<input name="address" placeholder="Address" type="text" />
+					</div>
+					<div>
+						<label for="city">City</label>
+						<input name="city" placeholder="City" type="text" />
+					</div>
+					<div>
+						<label for="state">State</label>
+						<input name="state" placeholder="State" type="text" />
+					</div>
+					<div>
 						<label for="ssn">SSN</label>
-						<input name="ssn" placeholder="SSN" type="password" />
-					</p>
-					<p>
+						<input name="ssn" placeholder="Enter as digits, no dashes" type="password" />
+					</div>
+					<div>
+						<label for="sex">Sex:</label>
+						<select id="sex" type="select" placeholder="Select sex" name="sex" required="true" >
+							<option value="male">male</option>
+							<option value="female">female</option>
+							<option value="other">other</option>
+						</select>
+					</div>
+					<div>
+						<label for="dob">Date of Birth</label>
+						<input name="dob" type="date" />
+					</div>
+					<div>
+						<label for="phone_number">Telephone Number</label>
+						<input name="phone_number" placeholder="Enter as digits, no dashes" type="text" />
+					</div>
+					<div>
 						<label for="username">Username</label>
 						<input name="username" placeholder="username" type="text" />
-					</p>
-					<p>
+					</div>
+					<div>
 						<label for="password">Password</label>
 						<input name="password" placeholder="password" type="password" />
-					</p>
-					<p>
+					</div>
+					<div>
 						<label for="passwordConfirmation">Password confirmation</label>
 						<input name="passwordConfirmation" placeholder="password" type="password" />
-					</p>
+					</div>
 				{{/if}}
 			</div>
 			<div class="col23 row5 form">

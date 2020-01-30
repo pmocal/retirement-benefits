@@ -1,3 +1,10 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<body>
+	<div class="col123 row1">
+		<p>{{message}}</p>
+		<p>{{error.status}}</p>
+	</div>
+	<div class="row2345 col12345 error">
+		<pre>{{error.stack}}</pre>
+	</div>
+	{{> back_link}}
+</body>
