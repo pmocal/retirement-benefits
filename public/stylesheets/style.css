@@ -76,3 +76,34 @@ form button {
 .form {
 	text-align: center;
 }
+
+li, a {
+	display: block;
+	transition-duration: 0.5s;
+}
+
+li:hover, a:hover {
+	cursor: pointer;
+}
+
+ul {
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	transition: all 0.5s ease;
+	margin-top: 1rem;
+	right: 0;
+	display: none;
+}
+
+#menu:hover ul,
+ul:hover {
+	visibility: visible;
+	opacity: 1;
+	display: block;
+}
+
+ul li {
+	clear: both;
+	width: 100%;
+}
