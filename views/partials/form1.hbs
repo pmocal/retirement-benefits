@@ -1,0 +1,55 @@
+<form action="/" method="POST">
+	<div class="col23 row3">
+		<p class="form">
+			<label for="last_name">Last name:</label>
+			<input name="last_name" value="{{user.last_name}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="first_name">First name:</label>
+			<input name="first_name" value="{{user.first_name}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="address">Address:</label>
+			<input name="address" value="{{user.address}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="city">City:</label>
+			<input name="city" value="{{user.city}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="state">State:</label>
+			<input name="state" value="{{user.state}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="ssn">SSN:</label>
+			<input name="ssn" value="{{user.ssn_formatted}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="sex">Sex:</label>
+			<input name="sex" value="{{user.sex}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="dob">Date of Birth:</label>
+			<input name="dob" value="{{user.dob_form}}" type="date" />
+		</p>
+		<p class="form">
+			<label for="phone_number">Telephone Number:</label>
+			<input name="phone_number" value="{{user.phone_number_formatted}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="nafi">Employee NAFI:</label>
+			<input name="nafi" type="text" />
+		</p>
+		<p class="form">
+			<label for="installation">Installation:</label>
+			<input name="installation" type="text" />
+		</p>
+		<p class="form">
+			<label for="date">I elect to submit an application for retirement to be effective:</label>
+			<input name="date" type="Date" />
+		</p>
+	</div>
+	<div class="col23 row4 form">
+		<button>Submit</button>
+	</div>
+</form>

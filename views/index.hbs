@@ -3,6 +3,18 @@
 	{{> header}}
 	{{#if user}}
 		{{> myprofile_menu}}
+		<div class="col23 row2">
+			<h2>Retirement Election Form</h2>
+		</div>
+		<div class="col23 row34">
+			{{#ifEquals user.submission_status "not submitted"}}
+				{{> form1}}
+			{{/ifEquals}}
+			{{#ifNotEquals user.submission_status "not submitted"}}
+				<p>Your form status is <span>{{user.submission_status}}</span></p>
+			{{/ifNotEquals}}
+		</div>
+		{{> error_display}}
 	{{else}}
 		<div class="col23 row2">
 			<h2>Log In</h2>

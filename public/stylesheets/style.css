@@ -89,10 +89,7 @@ li:hover, a:hover {
 ul {
 	visibility: hidden;
 	opacity: 0;
-	position: absolute;
 	transition: all 0.5s ease;
-	margin-top: 1rem;
-	right: 0;
 	display: none;
 }
 

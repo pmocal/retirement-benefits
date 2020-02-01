@@ -15,7 +15,9 @@ var UserSchema = new Schema(
 		phone_number: { type: String, required: true },
 		username: { type: String, required: true },
 		password: { type: String, required: true },
-		is_admin: false
+		is_admin: false,
+		submission_status: { type: String, default: "not submitted" },
+		submission: { type: Buffer }
 	}
 )
 
@@ -23,6 +25,12 @@ UserSchema
 .virtual('dob_formatted')
 .get(function () {
 	return moment(this.dob).format('YYYYMMDD');
+});
+
+UserSchema
+.virtual('dob_form')
+.get(function () {
+	return moment(this.dob).format('YYYY-MM-DD');
 });
 
 UserSchema

@@ -25,6 +25,18 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
+	return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+hbs.registerHelper('ifNotEquals', function(arg1, arg2, options) {
+	return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
+});
+hbs.registerHelper( 'toString', function returnToString( x ){
+	return ( x === void 0 ) ? 'undefined' : x.toString();
+} );
+hbs.registerHelper( 'get_Id', function(x){
+  return ( x === void 0 ) ? 'undefined' : x._id();
+});
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 var User = require('./models/user');
@@ -71,7 +83,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get("/", user_controller.index);
+app.get("/", user_controller.index_get);
+
+app.post("/", user_controller.index_post);
 
 app.get("/sign-up", user_controller.sign_up_get);
 
