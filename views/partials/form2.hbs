@@ -1,0 +1,75 @@
+<form action="/" method="POST">
+	<div class="col23 row3">
+		<p class="form">
+			<label for="ssn">SSN:</label>
+			<input name="ssn" value="{{applicant.ssn_formatted}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="first_name">First name:</label>
+			<input name="first_name" value="{{applicant.first_name}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="last_name">Last name:</label>
+			<input name="last_name" value="{{applicant.last_name}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="middle_initial">Middle Initial:</label>
+			<input name="middle_initial" type="text" />
+		</p>
+		<p class="form">
+			<label for="dob">Date of Birth:</label>
+			<input name="dob" value="{{applicant.dob_form}}" type="date" />
+		</p>
+		<p class="form">
+			<label for="sex">Sex:</label>
+			<input name="sex" value="{{applicant.sex}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="base">Base:</label>
+			<input name="base" type="text" />
+		</p>
+		<p class="form">
+			<label for="termination">Termination Date:</label>
+			<input name="termination" type="date" />
+		</p>
+		<p class="form">
+			<label for="address">Address:</label>
+			<input name="address" value="{{applicant.address}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="city">City:</label>
+			<input name="city" value="{{applicant.city}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="state">State:</label>
+			<input name="state" value="{{applicant.state}}" type="text" />
+		</p>
+		<p class="form">
+			<label for="zip">Zip:</label>
+			<input name="zip" type="text" />
+		</p>
+		<p class="form">
+			<label for="date">Retirement Date:</label>
+			<input name="date" value="{{applicant.date}}" type="Date" />
+		</p>
+		<p class="form">
+			<label for="contrib">Contributions:</label>
+			<input name="contrib" type="text" />
+		</p>
+		<p class="form">
+			<label for="salary">Salary:</label>
+			<input name="salary" type="text" />
+		</p>
+		<p class="form">
+			<label for="rcs">Retirement Credited Service:</label>
+			<input name="rcs" type="text" />
+		</p>
+		<p class="form">
+			<label for="sick">Sick leave:</label>
+			<input name="sick" type="text" />
+		</p>
+	</div>
+	<div class="col23 row4 form">
+		<button>Calculate</button>
+	</div>
+</form>

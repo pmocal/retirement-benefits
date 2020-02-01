@@ -5,4 +5,6 @@ var user_controller = require('../controllers/userController');
 
 router.get('/myprofile', ensureAuthentication.noCache, ensureAuthentication.ensureAuthenticated, user_controller.user_profile_get);
 
+router.get('/:id', ensureAuthentication.noCache, ensureAuthentication.ensureAuthenticated, user_controller.retirement_calculator_get);
+
 module.exports = router;

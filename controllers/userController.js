@@ -134,9 +134,19 @@ exports.index_post = [
 	}
 ]
 
+exports.retirement_calculator_get = function(req, res, next) {
+	User.findById(req.params.id)
+		.exec(function(err, applicant) {
+			if (err) {
+				return next(err);
+			}
+			res.render("retirement_calculator_form", { title: 'Retirement Calculator', user: req.user, applicant: applicant });
+		})
+}
+
 //display profile page for a specific user
 exports.user_profile_get = function(req, res, next) {
-	User.findById(req.user.id)
+	User.find(req.user.id)
 		.exec(function(err, user) {
 			if (err) {
 				return next(err);

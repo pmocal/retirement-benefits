@@ -1,0 +1,12 @@
+<body>
+	{{> home_link}}
+	<div class="col23 row1">
+		<h2>Retirement Calculation Form</h2>
+	</div>
+	{{#ifEquals user.ssn "admin"}}
+		{{> admin_menu}}
+		<div class="col23 row234">
+			{{> form2}}
+		</div>
+	{{/ifEquals}}
+</body>
