@@ -1,7 +1,9 @@
-{{#if errors}}
-	<ul>
-		{{#each errors}}
-			<li>{{this.msg}}</li>
-		{{/each}}
-	</ul>
-{{/if}}
+<div>
+	{{#if errors}}
+		<ol>
+			{{#each errors}}
+				<li>{{this.msg}}</li>
+			{{/each}}
+		</ol>
+	{{/if}}
+</div>
