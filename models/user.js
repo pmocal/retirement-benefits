@@ -45,4 +45,10 @@ UserSchema
   return this.ssn.slice(0,3) + '-' + this.ssn.slice(3,5) + '-' + this.ssn.slice(5,9);
 });
 
+UserSchema
+.virtual('submission_src')
+.get(function() {
+	return 'data:application/pdf;base64,' + this.submission.toString('base64');
+})
+
 module.exports = mongoose.model('User', UserSchema);

@@ -52,15 +52,15 @@ exports.index_post = [
 				content: [
 					{
 						text: req.body.last_name,
-						absolutePosition: {x:410, y:510}
+						absolutePosition: {x:86, y:410}
 					},
 					{
 						text: req.body.first_name,
-						absolutePosition: {x:1027, y:510}
+						absolutePosition: {x:86, y:510}
 					},
 					{
 						text: req.body.address,
-						absolutePosition: {x:450, y:590}
+						absolutePosition: {x:86, y:615}
 					},
 					{
 						text: req.body.city,
@@ -112,7 +112,7 @@ exports.index_post = [
 						_id: req.user.id
 					},
 					{
-						submission: response.toString('base64'),
+						submission: response,
 						submission_status: "submitted"
 					},
 					function(err) {

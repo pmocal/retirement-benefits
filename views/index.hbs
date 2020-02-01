@@ -12,6 +12,7 @@
 			{{/ifEquals}}
 			{{#ifNotEquals user.submission_status "not submitted"}}
 				<p>Your form status is <span>{{user.submission_status}}</span></p>
+				<a href="{{user.submission_src}}">Right click and open in new tab to view form!</a>
 			{{/ifNotEquals}}
 		</div>
 		{{> error_display}}
