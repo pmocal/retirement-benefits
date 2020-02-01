@@ -207,7 +207,7 @@ exports.retirement_calculator_post = [
 
 //display profile page for a specific user
 exports.user_profile_get = function(req, res, next) {
-	User.find(req.user.id)
+	User.findById(req.user.id)
 		.exec(function(err, user) {
 			if (err) {
 				return next(err);
