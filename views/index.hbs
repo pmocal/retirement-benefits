@@ -25,10 +25,15 @@
 			<div class="col23 row34">
 				<p>Right click and open in new tab to view a form if there are any submissions!</p>
 				<ol>
-					{{#each form_list}}
+					{{#each unprocessed}}
 						<li>
 							<a href="{{this.submission_src}}">Retirement Election Form submitted by {{this.last_name}}, {{this.first_name}}</a>
 							<a href="/user/{{this.id}}">Calculate Retirement</a>
+						</li>
+					{{/each}}
+					{{#each processed}}
+						<li>
+							<a href="{{this.retirement_src}}">Retirement Election Form by {{this.last_name}}, {{this.first_name}} processed</a>
 						</li>
 					{{/each}}
 				</ul>

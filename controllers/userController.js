@@ -4,16 +4,23 @@ const { sanitizeBody } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const path = require('path');
 const generatePdfBase64 = require('../util/generatePdfBase64');
+const async = require('async');
 
-
-exports.index_get = (req, res) => { 
-	User.find({submission_status: "submitted"})
-		.exec(function(err, list_users) {
-			if (err) {
-				return next(err);
-			}
-			res.render("index", { user: req.user, title: "AFS Retirement Benefits", form_list: list_users });
-		})
+exports.index_get = (req, res) => {
+	async.parallel({
+		unprocessed: function(callback) {
+			User.find({submission_status: "submitted"})
+				.exec(callback)
+		},
+		processed: function(callback) {
+			User.find({submission_status: "processed"})
+			.exec(callback)
+		},
+	}, function(err, results) {
+		if (err) { return next(err); } //error in API usage
+		res.render("index", { user: req.user, title: "AFS Retirement Benefits",
+			processed: results.processed, unprocessed: results.unprocessed });
+	});
 };
 
 exports.index_post = [
@@ -143,6 +150,60 @@ exports.retirement_calculator_get = function(req, res, next) {
 			res.render("retirement_calculator_form", { title: 'Retirement Calculator', user: req.user, applicant: applicant });
 		})
 }
+
+exports.retirement_calculator_post = [
+	check('ssn', 'SSN must be at least 9 digits').isLength({ min: 9 }).trim(),
+	check('first_name', 'First name must not be empty.').isLength({ min: 1 }).trim(),
+	check('last_name', 'Last name must not be empty.').isLength({ min: 1 }).trim(),
+	check('middle_initial', 'Middle initial must not be empty.').isLength({ min: 1 }).trim(),
+	check('dob', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
+	check('sex', 'Sex must not be empty.').isLength({ min: 1 }).trim(),
+	check('base', 'Base must not be empty.').isLength({ min: 1 }).trim(),
+	check('termination', 'Termination must not be empty.').isLength({ min: 1 }).trim(),
+	check('address', 'Address must not be empty.').isLength({ min: 1 }).trim(),
+	check('city', 'City must not be empty.').isLength({ min: 1 }).trim(),
+	check('state', 'State must not be empty.').isLength({ min: 1 }).trim(),
+	check('zip', 'Zip must not be empty.').isLength({ min: 1 }).trim(),
+	check('date', 'Invalid Retirement Date').optional({ checkFalsy: true }).isISO8601(),
+	check('contrib', 'Contributions must not be empty.').notEmpty().trim(),
+	check('interest', 'Interest must not be empty.').notEmpty().trim(),
+	check('salary', 'Salary must not be empty.').notEmpty().trim(),
+	check('rcs', 'Retirement Credited Service must not be empty.').notEmpty().trim(),
+	check('sick', 'Sick leave must not be empty.').notEmpty().trim(),
+	// Sanitize fields (using wildcard).
+	sanitizeBody('ssn').escape(),
+	sanitizeBody('first_name').escape(),
+	sanitizeBody('last_name').escape(),
+	sanitizeBody('middle_initial').escape(),
+	sanitizeBody('dob').toDate(),
+	sanitizeBody('sex').escape(),
+	sanitizeBody('base').escape(),
+	sanitizeBody('termination').escape(),
+	sanitizeBody('address').escape(),
+	sanitizeBody('city').escape(),
+	sanitizeBody('state').escape(),
+	sanitizeBody('zip').escape(),
+	sanitizeBody('date').toDate(),
+	sanitizeBody('contrib').escape(),
+	sanitizeBody('interest').escape(),
+	sanitizeBody('salary').escape(),
+	sanitizeBody('rcs').escape(),
+	sanitizeBody('sick').escape(),
+	async (req, res, next) => {
+		// Extract the validation errors from a request.
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			// There are errors. Render form again with sanitized values/error messages.
+			res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: applicant, errors: errors.array() });
+			// , { title: 'Create Item', item: item, errors: errors.array() });
+		// else if (await User.exists({ssn: req.body.ssn})) {
+		// 	res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: applicant, errors: [{'msg': 'SSN already exists among Users'}] });
+		// }
+		} else {
+			res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: applicant, processing: 'Retirement calculation still in progress' });
+		}
+	}
+]
 
 //display profile page for a specific user
 exports.user_profile_get = function(req, res, next) {

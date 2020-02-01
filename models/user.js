@@ -17,7 +17,8 @@ var UserSchema = new Schema(
 		password: { type: String, required: true },
 		is_admin: false,
 		submission_status: { type: String, default: "not submitted" },
-		submission: { type: Buffer }
+		submission: { type: Buffer },
+		calculation: { type: Buffer }
 	}
 )
 
@@ -49,6 +50,12 @@ UserSchema
 .virtual('submission_src')
 .get(function() {
 	return 'data:application/pdf;base64,' + this.submission.toString('base64');
+})
+
+UserSchema
+.virtual('retirement_src')
+.get(function() {
+	return 'data:application/pdf;base64,' + this.retirement.toString('base64');
 })
 
 module.exports = mongoose.model('User', UserSchema);
