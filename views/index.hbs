@@ -2,40 +2,44 @@
 	{{> home_link}}
 	{{> header}}
 	{{#if user}}
-		{{> myprofile_menu}}
-		<div class="col23 row2">
-			<h2>Retirement Election Form</h2>
-		</div>
-		<div class="col23 row34">
-			{{#ifEquals user.submission_status "not submitted"}}
-				{{> form1}}
-			{{/ifEquals}}
-			{{#ifNotEquals user.submission_status "not submitted"}}
-				<p>Your form status is <span>{{user.submission_status}}</span></p>
-				<a href="{{user.submission_src}}">Right click and open in new tab to view form!</a>
-			{{/ifNotEquals}}
-		</div>
+		{{#ifNotEquals user.ssn "admin"}}
+			{{> myprofile_menu}}
+			<div class="col23 row2">
+				<h2>Retirement Election Form</h2>
+			</div>
+			<div class="col23 row34">
+				{{#ifEquals user.submission_status "not submitted"}}
+					{{> form1}}
+				{{/ifEquals}}
+				{{#ifNotEquals user.submission_status "not submitted"}}
+					<p>Your form status is <span>{{user.submission_status}}</span></p>
+					<a href="{{user.submission_src}}">Right click and open in new tab to view form!</a>
+				{{/ifNotEquals}}
+			</div>
+		{{/ifNotEquals}}
+		{{#ifEquals user.ssn "admin"}}
+			{{> admin_menu}}
+			<div class="col23 row2">
+				<h2>List of Retirement Election Form submitted by users/customers:</h2>
+			</div>
+			<div class="col23 row34">
+				<p>Right click and open in new tab to view a form if there are any submissions!</p>
+				<ol>
+					{{#each form_list}}
+						<li>
+							<a href="{{this.submission_src}}">Retirement Election Form submitted by {{this.last_name}}, {{this.first_name}}</a>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+		{{/ifEquals}}
 		{{> error_display}}
 	{{else}}
 		<div class="col23 row2">
 			<h2>Log In</h2>
 		</div>
 		<div class="col23 row34">
-			<form action="/log-in" method="POST">
-				<div class="col23 row3">
-					<p class="form">
-						<label for="username">Username</label>
-						<input name="username" placeholder="username" type="text" />
-					</p>
-					<p class="form">
-						<label for="password">Password</label>
-						<input name="password" placeholder="password" type="password" />
-					</p>
-				</div>
-				<div class="col23 row4 form">
-					<button>Log In</button>
-				</div>
-			</form>
+			{{> login_form}}
 		</div>
 		<div class="col23 row5">
 			<p>Don't have an account? <a href="/sign-up">Click here to register/signup</a></p>

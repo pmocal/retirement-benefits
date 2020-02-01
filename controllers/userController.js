@@ -7,7 +7,13 @@ const generatePdfBase64 = require('../util/generatePdfBase64');
 
 
 exports.index_get = (req, res) => { 
-	res.render("index", { user: req.user, title: "AFS Retirement Benefits" });
+	User.find({submission_status: "submitted"})
+		.exec(function(err, list_users) {
+			if (err) {
+				return next(err);
+			}
+			res.render("index", { user: req.user, title: "AFS Retirement Benefits", form_list: list_users });
+		})
 };
 
 exports.index_post = [
