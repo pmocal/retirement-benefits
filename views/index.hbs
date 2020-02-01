@@ -7,13 +7,13 @@
 			<div class="col23 row2">
 				<h2>Retirement Election Form</h2>
 			</div>
-			<div class="col23 row34">
+			<div class="col23 row34 iframe">
 				{{#ifEquals user.submission_status "not submitted"}}
 					{{> form1}}
 				{{/ifEquals}}
 				{{#ifNotEquals user.submission_status "not submitted"}}
 					<p>Your form status is <span>{{user.submission_status}}</span></p>
-					<a href="{{user.submission_src}}">Right click and open in new tab to view form!</a>
+					<iframe src="{{user.submission_src}}"></iframe>
 				{{/ifNotEquals}}
 			</div>
 		{{/ifNotEquals}}

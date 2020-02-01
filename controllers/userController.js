@@ -114,7 +114,7 @@ exports.index_post = [
 				],
 				defaultStyle: {
 					font: 'Helvetica',
-					fontSize: 25,
+					fontSize: 40,
 					alignment: 'justify'
 				},
 			};
