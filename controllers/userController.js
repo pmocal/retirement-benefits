@@ -1,6 +1,5 @@
 const User = require('../models/user');
-const { check,validationResult } = require('express-validator');
-const { sanitizeBody } = require('express-validator');
+const { check,validationResult, sanitizeBody } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const path = require('path');
 const generatePdfBase64 = require('../util/generatePdfBase64');
@@ -34,25 +33,14 @@ exports.index_post = [
 	check('phone_number', 'Phone number must be at least 9 digits').isLength({ min: 9 }).trim(),
 	check('nafi', 'Employee NAFI must not be empty.').isLength({ min: 1 }).trim(),
 	check('installation', 'Installation must not be empty.').isLength({ min: 1 }).trim(),
-	check('date', 'Start Date must not be empty.').isLength({ min: 1 }).trim(),
-	// Sanitize fields (using wildcard).
-	sanitizeBody('last_name').escape(),
-	sanitizeBody('first_name').escape(),
-	sanitizeBody('address').escape(),
-	sanitizeBody('city').escape(),
-	sanitizeBody('state').escape(),
-	sanitizeBody('ssn').escape(),
-	sanitizeBody('sex').escape(),
+	check('date', 'Invalid Start Date').optional({ checkFalsy: true }).isISO8601(),
 	sanitizeBody('dob').toDate(),
-	sanitizeBody('phone_number').escape(),
-	sanitizeBody('nafi').escape(),
-	sanitizeBody('installation').escape(),
 	sanitizeBody('date').toDate(),
 	async (req, res, next) => {
 		// Extract the validation errors from a request.
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			// There are errors. Render form again with sanitized values/error messages.
+			// There are errors. Render form again with values/error messages.
 			res.render('index', { user: req.user, errors: errors.array() });
 			// , { title: 'Create Item', item: item, errors: errors.array() });
 		}
@@ -170,37 +158,18 @@ exports.retirement_calculator_post = [
 	check('salary', 'Salary must not be empty.').notEmpty().trim(),
 	check('rcs', 'Retirement Credited Service must not be empty.').notEmpty().trim(),
 	check('sick', 'Sick leave must not be empty.').notEmpty().trim(),
-	// Sanitize fields (using wildcard).
-	sanitizeBody('ssn').escape(),
-	sanitizeBody('first_name').escape(),
-	sanitizeBody('last_name').escape(),
-	sanitizeBody('middle_initial').escape(),
-	sanitizeBody('dob').toDate(),
-	sanitizeBody('sex').escape(),
-	sanitizeBody('base').escape(),
-	sanitizeBody('termination').escape(),
-	sanitizeBody('address').escape(),
-	sanitizeBody('city').escape(),
-	sanitizeBody('state').escape(),
-	sanitizeBody('zip').escape(),
-	sanitizeBody('date').toDate(),
-	sanitizeBody('contrib').escape(),
-	sanitizeBody('interest').escape(),
-	sanitizeBody('salary').escape(),
-	sanitizeBody('rcs').escape(),
-	sanitizeBody('sick').escape(),
 	async (req, res, next) => {
 		// Extract the validation errors from a request.
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			// There are errors. Render form again with sanitized values/error messages.
-			res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: applicant, errors: errors.array() });
+			// There are errors. Render form again with values/error messages.
+			res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: req.body.applicant, errors: errors.array() });
 			// , { title: 'Create Item', item: item, errors: errors.array() });
 		// else if (await User.exists({ssn: req.body.ssn})) {
 		// 	res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: applicant, errors: [{'msg': 'SSN already exists among Users'}] });
 		// }
 		} else {
-			res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: applicant, processing: 'Retirement calculation still in progress' });
+			res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: req.body.applicant, processing: 'Retirement calculation still in progress' });
 		}
 	}
 ]
@@ -231,22 +200,10 @@ exports.sign_up_post = [
 	check('username', 'Username must not be empty.').isLength({ min: 1 }).trim(),
 	check('password', 'Password must not be empty').isLength({ min: 1 }).trim(),
 	check('passwordConfirmation').exists(),
-	// Sanitize fields (using wildcard).
-	sanitizeBody('last_name').escape(),
-	sanitizeBody('first_name').escape(),
-	sanitizeBody('address').escape(),
-	sanitizeBody('city').escape(),
-	sanitizeBody('state').escape(),
-	sanitizeBody('ssn').escape(),
-	sanitizeBody('sex').escape(),
-	sanitizeBody('dob').toDate(),
-	sanitizeBody('phone_number').escape(),
-	sanitizeBody('username').escape(),
-	sanitizeBody('password').escape(),
-	sanitizeBody('passwordConfirmation').escape(),
 	check('passwordConfirmation', 'passwordConfirmation field must have the same value as the password field')
 	    .exists()
 	    .custom((value, { req }) => value === req.body.password),
+	sanitizeBody('dob').toDate(),
 	async (req, res, next) => {
 		// Extract the validation errors from a request.
 		var user = new User({
@@ -260,12 +217,15 @@ exports.sign_up_post = [
 		})
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			// There are errors. Render form again with sanitized values/error messages.
+			// There are errors. Render form again with values/error messages.
 			res.render('sign_up_form', { title: "Sign Up", user: user, errors: errors.array() });
 			// , { title: 'Create Item', item: item, errors: errors.array() });
 		}
 		else if (await User.exists({ssn: req.body.ssn})) {
 			res.render('sign_up_form', { title: "Sign Up", user: user, errors: [{'msg': 'SSN already exists among Users'}] });
+		}
+		else if (await User.exists({username: req.body.username})) {
+			res.render('sign_up_form', { title: "Sign Up", user: req.user, errors: [{'msg': 'Username already exists among Users'}] });
 		}
 		else {
 			// Data from form is valid. Save book.

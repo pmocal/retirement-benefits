@@ -7,4 +7,6 @@ router.get('/myprofile', ensureAuthentication.noCache, ensureAuthentication.ensu
 
 router.get('/:id', ensureAuthentication.noCache, ensureAuthentication.ensureAuthenticated, user_controller.retirement_calculator_get);
 
+router.post('/:id', ensureAuthentication.noCache, ensureAuthentication.ensureAuthenticated, user_controller.retirement_calculator_post);
+
 module.exports = router;
