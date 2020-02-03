@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const path = require('path');
 const generatePdfBase64 = require('../util/generatePdfBase64');
 const async = require('async');
+var moment = require('moment');
 
 exports.index_get = (req, res) => {
 	async.parallel({
@@ -158,19 +159,68 @@ exports.retirement_calculator_post = [
 	check('salary', 'Salary must not be empty.').notEmpty().trim(),
 	check('rcs', 'Retirement Credited Service must not be empty.').notEmpty().trim(),
 	check('sick', 'Sick leave must not be empty.').notEmpty().trim(),
+	sanitizeBody('dob').toDate(),
+	sanitizeBody('date').toDate(),
 	async (req, res, next) => {
 		// Extract the validation errors from a request.
 		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			// There are errors. Render form again with values/error messages.
-			res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: req.body.applicant, errors: errors.array() });
-			// , { title: 'Create Item', item: item, errors: errors.array() });
-		// else if (await User.exists({ssn: req.body.ssn})) {
-		// 	res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: applicant, errors: [{'msg': 'SSN already exists among Users'}] });
-		// }
-		} else {
-			res.render('retirement_calculator_form', { title: 'Retirement Calculator', user: req.user, applicant: req.body.applicant, processing: 'Retirement calculation still in progress' });
+		var additional = {
+			zip: req.body.zip,
+			base: req.body.base,
+			salary: req.body.salary,
+			sick: req.body.sick,
+			rcs: req.body.rcs,
+			interest: req.body.interest,
+			middle_initial: req.body.middle_initial,
+			contrib: req.body.contrib
 		}
+		User.findById(req.params.id)
+			.exec(function(err, applicant) {
+				if (err) {
+					return next(err);
+				}
+				if (!errors.isEmpty()) {
+					// There are errors. Render form again with values/error messages.
+					res.render('retirement_calculator_form',
+						{ title: 'Retirement Calculator', user: req.user, applicant: applicant, additional: additional, errors: errors.array() });
+				} else {
+					User.findByIdAndUpdate(
+						{
+							_id: req.params.id
+						},
+						{
+							submission_status: "processed"
+						},
+						function(err) {
+							if (err) {
+								return next(err);
+							} else {
+								var additional = {
+									zip: req.body.zip,
+									base: req.body.base,
+									salary: req.body.salary,
+									sick: req.body.sick,
+									rcs: req.body.rcs,
+									interest: req.body.interest,
+									middle_initial: req.body.middle_initial,
+									contrib: req.body.contrib,
+									years_til: moment().diff(req.body.dob, 'years', true)
+								}
+								User.findById(req.params.id)
+									.exec(function(err, updatedApplicant) {
+										if (err) {
+											return next(err);
+										} else {
+											res.render('retirement_calculator_form',
+												{ title: 'Retirement Calculator', user: req.user, applicant: updatedApplicant,
+												additional: additional });
+										}
+									})
+							}
+						}
+					)
+				}
+			})
 	}
 ]
 
