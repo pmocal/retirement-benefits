@@ -14,6 +14,46 @@
 				{{#ifNotEquals user.submission_status "not submitted"}}
 					<p>Your form status is <span>{{user.submission_status}}</span></p>
 					<iframe src="{{user.submission_src}}"></iframe>
+					{{#ifEquals user.submission_status "processed"}}
+						<iframe src="{{user.calculation_src}}"></iframe>
+						<p id="instructions">
+							Note to the retiree:
+							<br><br>
+							Your eligibility for retirement starts at age 52. This means you will be able to receive your retirement money starting at 52 years of age.  However, if you would like to retire at the age of 62 or older, you will not receive your contributions. Similarly, if you have been receiving your contributions since you were 52 years of age, your contributions will decrease in amount when you turn 62 and thereafter.
+							Below, you must select one out of three different options. We have calculated and given you options to select from (below). You can select your retirement date and how you want to receive your retirement benefits and contributions.
+							<br><br>
+							Understanding your options below…
+							<br><br>
+							<span class="math">Retirement (age >= 52)</span>:
+							<br><br>
+							<span>Option A</span> will give you the highest amount from the contributions possible however, your contributions may not last longer than option B.
+							<br><br>
+							<span>Option 1 (B)</span> will give you the moderate amount from the contributions, however your contributions may last a bit longer than option A.
+							<br><br>
+							<span class="math">Retirement (age < 52)</span>:
+							<br><br>
+							<span>Option 2</span> is for people who are age of 62 or older or for someone you would like to receive the retirement benefits after they have reached the age of 62. However, you will lose all your contributions. 
+							<br><br>
+							<span>Option 3</span> is for people who are age of 62 or older or for employees who would like to receive the retirement benefits after they have reached the age of 62. However, you will lose all your contributions.
+						</p>
+						<hr>
+						<span class="math">Retirement Eligible (age >= 52)</span>:
+						<p>Retirement Election Date {{user.retdate_formatted}}</p>
+						<input type="radio" name="option">Option 1a<br>
+						<p>With contributions you will receive a monthly benefit payment in the amount of:</p>
+						<input type="radio" name="option">Option 1b<br>
+						<p>Without contributions you will receive a monthly benefit payment in the amount of:</p>
+						<hr>
+						<span class="math">Early Retirement (age < 52)</span>:
+						<p>Retirement Election Date {{user.retdate_formatted}}</p>
+						<input type="radio" name="option">Option 2<br>
+						<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above):</p>
+						<hr>
+						<span class="math">Late Retirement (age > 62)</span>:
+						<p>{{additional.date_when_62}}</p>
+						<input type="radio" name="option">Option 3<br>
+						<p>Without contributions you will receive a monthly benefit payment in the amount of:</p>
+					{{/ifEquals}}
 				{{/ifNotEquals}}
 			</div>
 		{{/ifNotEquals}}
@@ -33,8 +73,7 @@
 					{{/each}}
 					{{#each processed}}
 						<li>
-							{{!-- <a href="{{this.retirement_src}}">Retirement Election Form by {{this.last_name}}, {{this.first_name}} processed</a> --}}
-							<a>Retirement Election Form by {{this.last_name}}, {{this.first_name}} processed</a>
+							<a href="{{this.calculation_src}}">Retirement Election Form by {{this.last_name}}, {{this.first_name}} processed</a>
 						</li>
 					{{/each}}
 				</ol>

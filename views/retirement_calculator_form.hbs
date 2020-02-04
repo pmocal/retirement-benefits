@@ -7,11 +7,7 @@
 		{{> admin_menu}}
 		<div class="col23 row234">
 			{{#ifEquals applicant.submission_status "processed"}}
-				<p>SSN: {{applicant.ssn_formatted}}</p>
-				<p>DOB: {{applicant.dob_formatted}}</p>
-				<p>Full Name: {{applicant.first_name}} {{applicant.middle_initial}} {{applicant.last_name}}</p>
-				<p>You have (years left to be 62 or older): {{additional.years_til}}</p>
-				<p>Your total contribution (last 5 years): ${{additional.contrib}}</p>
+				{{> form3}}
 			{{else}}
 				{{> form2}}
 			{{/ifEquals}}

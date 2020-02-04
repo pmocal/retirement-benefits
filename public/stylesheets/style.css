@@ -113,3 +113,13 @@ ul li {
 	clear: both;
 	width: 100%;
 }
+
+#instructions {
+	text-align: left;
+	font-family: Arial;
+}
+
+.math {
+	font-family: Courier;
+	color: black;
+}

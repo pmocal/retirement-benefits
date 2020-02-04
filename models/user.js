@@ -18,7 +18,20 @@ var UserSchema = new Schema(
 		is_admin: false,
 		submission_status: { type: String, default: "not submitted" },
 		submission: { type: Buffer },
-		calculation: { type: Buffer }
+		nafi: {type: String},
+		installation: {type: String},
+		middle_initial: {type: String},
+		base: {type: String},
+		termindate: {type: Date},
+		retdate: {type: Date},
+		zip: {type: String},
+		calculation: { type: Buffer },
+		contrib: { type: Number },
+		interest: { type: Number },
+		salary: { type: Number },
+		rcs: { type: Schema.Types.Decimal128 },
+		sick: {type: Number},
+		years_til: {type: String}
 	}
 )
 
@@ -32,6 +45,31 @@ UserSchema
 .virtual('dob_form')
 .get(function () {
 	return moment(this.dob).format('YYYY-MM-DD');
+});
+
+UserSchema
+.virtual('retdate_formatted')
+.get(function () {
+	return moment(this.retdate).format('YYYYMMDD');
+});
+
+UserSchema
+.virtual('retdate_form')
+.get(function () {
+	if (this.retdate) {
+		return moment(this.retdate).format('YYYY-MM-DD');
+	} else {
+		return;
+	}
+});
+
+UserSchema
+.virtual('termindate_formatted')
+.get(function () {
+	if (this.termindate) {
+		return moment(this.termindate).format('YYYYMMDD');
+	}
+	return;
 });
 
 UserSchema
@@ -53,9 +91,9 @@ UserSchema
 })
 
 UserSchema
-.virtual('retirement_src')
+.virtual('calculation_src')
 .get(function() {
-	return 'data:application/pdf;base64,' + this.retirement.toString('base64');
+	return 'data:application/pdf;base64,' + this.calculation.toString('base64');
 })
 
 module.exports = mongoose.model('User', UserSchema);
