@@ -26,33 +26,43 @@
 							<br><br>
 							<span class="math">Retirement (age >= 52)</span>:
 							<br><br>
-							<span>Option A</span> will give you the highest amount from the contributions possible however, your contributions may not last longer than option B.
+							<span class="math">Option A</span> will give you the highest amount from the contributions possible however, your contributions may not last longer than option B.
 							<br><br>
-							<span>Option 1 (B)</span> will give you the moderate amount from the contributions, however your contributions may last a bit longer than option A.
+							<span class="math">Option 1 (B)</span> will give you the moderate amount from the contributions, however your contributions may last a bit longer than option A.
 							<br><br>
 							<span class="math">Retirement (age < 52)</span>:
 							<br><br>
-							<span>Option 2</span> is for people who are age of 62 or older or for someone you would like to receive the retirement benefits after they have reached the age of 62. However, you will lose all your contributions. 
+							<span class="math">Option 2</span> is for people who are age of 62 or older or for someone you would like to receive the retirement benefits after they have reached the age of 62. However, you will lose all your contributions. 
 							<br><br>
-							<span>Option 3</span> is for people who are age of 62 or older or for employees who would like to receive the retirement benefits after they have reached the age of 62. However, you will lose all your contributions.
+							<span class="math">Option 3</span> is for people who are age of 62 or older or for employees who would like to receive the retirement benefits after they have reached the age of 62. However, you will lose all your contributions.
 						</p>
 						<hr>
 						<span class="math">Retirement Eligible (age >= 52)</span>:
-						<p>Retirement Election Date {{user.retdate_formatted}}</p>
+						<br><br>
+						<p>Retirement Election Date (YYYYMMDD): {{user.retdate_formatted}}</p>
+						<br><br>
 						<input type="radio" name="option">Option 1a<br>
 						<p>With contributions you will receive a monthly benefit payment in the amount of:</p>
+						<br><br>
 						<input type="radio" name="option">Option 1b<br>
 						<p>Without contributions you will receive a monthly benefit payment in the amount of:</p>
 						<hr>
 						<span class="math">Early Retirement (age < 52)</span>:
-						<p>Retirement Election Date {{user.retdate_formatted}}</p>
+						<br><br>
+						<p>Retirement Election Date (YYYYMMDD): {{user.retdate_formatted}}</p>
+						<br><br>
 						<input type="radio" name="option">Option 2<br>
+						<br><br>
 						<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above):</p>
 						<hr>
 						<span class="math">Late Retirement (age > 62)</span>:
-						<p>{{additional.date_when_62}}</p>
+						<br><br>
+						<p>Date when you become 62 years of age: {{additional.date_when_62}}</p>
+						<br><br>
 						<input type="radio" name="option">Option 3<br>
+						<br><br>
 						<p>Without contributions you will receive a monthly benefit payment in the amount of:</p>
+						<hr>
 					{{/ifEquals}}
 				{{/ifNotEquals}}
 			</div>
