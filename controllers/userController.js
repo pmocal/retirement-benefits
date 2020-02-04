@@ -18,6 +18,9 @@ exports.index_get = (req, res) => {
 		},
 	}, function(err, results) {
 		if (err) { return next(err); } //error in API usage
+		// var additional = {
+		// 	date_when_62: moment(updatedApplicant.dob_formatted, "YYYYMMDD").add(62, "years")
+		// }
 		res.render("index", { user: req.user, title: "AFS Retirement Benefits",
 			processed: results.processed, unprocessed: results.unprocessed });
 	});
@@ -270,11 +273,8 @@ exports.retirement_calculator_post = [
 														if (err) {
 															res.send(err);
 														} else {
-															var additional = {
-																date_when_62: moment(updatedApplicant.dob_formatted, "YYYYMMDD").add(62, "years")
-															}
 															res.render('retirement_calculator_form',
-															{ title: 'Retirement Calculator', user: req.user, applicant: updatedApplicant, additional: additional });
+															{ title: 'Retirement Calculator', user: req.user, applicant: updatedApplicant });
 														}
 													}
 												)
