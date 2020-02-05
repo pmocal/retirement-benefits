@@ -7,6 +7,13 @@ const async = require('async');
 var moment = require('moment');
 
 exports.index_get = (req, res) => {
+	if (req.user) {
+		if (req.user.submission_status === "processed") {
+			var additional = {
+				date_when_62: moment(req.user.dob_formatted, "YYYYMMDD").add(62, "years").format("YYYYMMDD")
+			}
+		}
+	}
 	async.parallel({
 		unprocessed: function(callback) {
 			User.find({submission_status: "submitted"})
@@ -18,11 +25,8 @@ exports.index_get = (req, res) => {
 		},
 	}, function(err, results) {
 		if (err) { return next(err); } //error in API usage
-		// var additional = {
-		// 	date_when_62: moment(updatedApplicant.dob_formatted, "YYYYMMDD").add(62, "years")
-		// }
 		res.render("index", { user: req.user, title: "AFS Retirement Benefits",
-			processed: results.processed, unprocessed: results.unprocessed });
+			processed: results.processed, unprocessed: results.unprocessed , additional: additional});
 	});
 };
 
