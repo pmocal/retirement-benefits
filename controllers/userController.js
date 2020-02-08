@@ -3,14 +3,25 @@ const { check,validationResult, sanitizeBody } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const path = require('path');
 const generatePdfBase64 = require('../util/generatePdfBase64');
+const returnOfContributions = require('../util/returnOfContributions');
 const async = require('async');
 var moment = require('moment');
 
 exports.index_get = (req, res) => {
 	if (req.user) {
 		if (req.user.submission_status === "processed") {
+			var percentoneptfive = req.user.salary*5*.015;
+			var percentoneptsevenfive = req.user.salary*1.25*.0175;
+			var percenttwo = req.user.salary*0*.02;
+			var annuity = percentoneptfive + percentoneptsevenfive + percenttwo;
+			var earlyRetirementReduction = 0.04*(annuity*req.user.years_til)-1;
+			var monthlyEarlyRetirementReduction = earlyRetirementReduction/12;
+			var reductionFactorMonthly = req.user.contrib * returnOfContributions[moment().diff(moment(req.body.dob), 'years', false)]
 			var additional = {
-				date_when_62: moment(req.user.dob_formatted, "YYYYMMDD").add(62, "years").format("YYYYMMDD")
+				monthlyEarlyRetirementReduction: monthlyEarlyRetirementReduction,
+				reductionFactorMonthly: reductionFactorMonthly,
+				date_when_62: moment(req.user.dob_formatted, "YYYYMMDD").add(62, "years").format("YYYYMMDD"),
+
 			}
 		}
 	}
@@ -170,7 +181,7 @@ exports.retirement_calculator_post = [
 	check('last_name', 'Last name must not be empty.').isLength({ min: 1 }).trim(),
 	check('dob', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
 	check('sex', 'Sex must not be empty.').isLength({ min: 1 }).trim(),
-	check('base', 'Base must not be empty.').isLength({ min: 1 }).trim(),
+	check('installation', 'Base must not be empty.').isLength({ min: 1 }).trim(),
 	check('address', 'Address must not be empty.').isLength({ min: 1 }).trim(),
 	check('city', 'City must not be empty.').isLength({ min: 1 }).trim(),
 	check('state', 'State must not be empty.').isLength({ min: 1 }).trim(),
@@ -204,7 +215,7 @@ exports.retirement_calculator_post = [
 						{
 							submission_status: "processed",
 							zip: req.body.zip,
-							base: req.body.base,
+							installation: req.body.installation,
 							salary: req.body.salary,
 							sick: req.body.sick,
 							rcs: req.body.rcs,
@@ -213,7 +224,7 @@ exports.retirement_calculator_post = [
 							contrib: req.body.contrib,
 							retdate: req.body.retdate,
 							termindate: req.body.termindate,
-							years_til: moment().diff(moment(req.body.dob), 'years', true)
+							years_til: 62-moment().diff(moment(req.body.dob), 'years', true)
 						},
 						function(err) {
 							if (err) {
