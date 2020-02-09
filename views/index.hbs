@@ -39,7 +39,9 @@
 						<hr>
 						<span class="math">Retirement Eligible (age >= 52)</span>:
 						<br><br>
-						<p>Retirement Election Date (YYYYMMDD): {{user.retdate_formatted}}</p>
+						<p>Payments will begin on (YYYYMMDD): {{user.retdate_formatted}}</p>
+						<br><br>
+						<p>You will receive total contributions in the amount of: {{user.contrib}}</p>
 						<br><br>
 						<input type="radio" name="option">Option 1a<br>
 						<p>With contributions you will receive a monthly benefit payment in the amount of:</p>
@@ -53,7 +55,7 @@
 						<br><br>
 						<input type="radio" name="option">Option 2<br>
 						<br><br>
-						<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above):</p>
+						<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above): {{additional.monthlyEarlyRetirementReduction}}</p>
 						<hr>
 						<span class="math">Late Retirement (age > 62)</span>:
 						<br><br>

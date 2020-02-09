@@ -31,7 +31,8 @@ var UserSchema = new Schema(
 		salary: { type: Number },
 		rcs: { type: Schema.Types.Decimal128 },
 		sick: {type: Number},
-		years_til: {type: String}
+		years_til: {type: Number},
+		ss_award: {type: Number}
 	}
 )
 
@@ -94,6 +95,12 @@ UserSchema
 .virtual('calculation_src')
 .get(function() {
 	return 'data:application/pdf;base64,' + this.calculation.toString('base64');
+})
+
+UserSchema
+.virtual('years_til')
+.get(function() {
+	return (62-moment().diff(moment(req.body.dob), 'years', true));
 })
 
 module.exports = mongoose.model('User', UserSchema);

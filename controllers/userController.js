@@ -16,7 +16,7 @@ exports.index_get = (req, res) => {
 			var annuity = percentoneptfive + percentoneptsevenfive + percenttwo;
 			var earlyRetirementReduction = 0.04*(annuity*req.user.years_til)-1;
 			var monthlyEarlyRetirementReduction = earlyRetirementReduction/12;
-			var reductionFactorMonthly = req.user.contrib * returnOfContributions[moment().diff(moment(req.body.dob), 'years', false)]
+			var reductionFactorMonthly = req.user.contrib*(-1)*returnOfContributions[moment().diff(moment(req.body.dob), 'years', false)]
 			var additional = {
 				monthlyEarlyRetirementReduction: monthlyEarlyRetirementReduction,
 				reductionFactorMonthly: reductionFactorMonthly,
@@ -192,6 +192,7 @@ exports.retirement_calculator_post = [
 	check('salary', 'Salary must not be empty.').notEmpty().trim(),
 	check('rcs', 'Retirement Credited Service must not be empty.').notEmpty().trim(),
 	check('sick', 'Sick leave must not be empty.').notEmpty().trim(),
+	check('years_til', 'Years till must not be empty.').notEmpty().trim(),
 	sanitizeBody('dob').toDate(),
 	sanitizeBody('retdate').toDate(),
 	sanitizeBody('termindate').toDate(),
@@ -224,7 +225,8 @@ exports.retirement_calculator_post = [
 							contrib: req.body.contrib,
 							retdate: req.body.retdate,
 							termindate: req.body.termindate,
-							years_til: 62-moment().diff(moment(req.body.dob), 'years', true)
+							years_til: req.body.years_til,
+							ss_award: req.body.ss_award
 						},
 						function(err) {
 							if (err) {
