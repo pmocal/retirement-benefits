@@ -13,13 +13,17 @@ exports.index_get = (req, res) => {
 			var percentoneptfive = req.user.salary*5*.015;
 			var percentoneptsevenfive = req.user.salary*1.25*.0175;
 			var percenttwo = req.user.salary*0*.02;
+			
 			var annuity = percentoneptfive + percentoneptsevenfive + percenttwo;
 			var earlyRetirementReduction = 0.04*(annuity*req.user.years_til)-1;
+			
 			var monthlyEarlyRetirementReduction = earlyRetirementReduction/12;
-			var reductionFactorMonthly = req.user.contrib*(-1)*returnOfContributions[moment().diff(moment(req.body.dob), 'years', false)]
+			
+			var reductionFactorMonthly = (req.user.contrib*12)/((-1)*12*returnOfContributions[moment().diff(moment(req.body.dob), 'years', false)])
+			
 			var additional = {
-				monthlyEarlyRetirementReduction: monthlyEarlyRetirementReduction,
-				reductionFactorMonthly: reductionFactorMonthly,
+				monthly_payment_amount1: req.user.contrib - monthlyEarlyRetirementReduction,
+				monthly_payment_amount2: req.user.contrib - monthlyEarlyRetirementReduction - reductionFactorMonthly,
 				date_when_62: moment(req.user.dob_formatted, "YYYYMMDD").add(62, "years").format("YYYYMMDD"),
 
 			}

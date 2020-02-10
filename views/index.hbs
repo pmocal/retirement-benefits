@@ -46,13 +46,14 @@
 						<p>You will receive total contributions in the amount of: {{user.contrib}}</p>
 						<br><br>
 						<input type="radio" name="option">Lumpsum:<br>
-						<p>With contributions you will receive a monthly benefit payment in the amount of:</p>
+						<p>With contributions you will receive a monthly benefit payment in the amount of: {{additional.monthly_payment_amount1}}</p>
 						<br><br>
 						<p>You will receive a monthly benefit payment in the amount of (with contributions after age of 62 and above): </p>
 						<input type="radio" name="option">Monthly Payment<br>
-						<p>Without contributions you will receive a monthly benefit payment in the amount of:</p>
+						<p>Without contributions you will receive a monthly benefit payment in the amount of: {{additional.monthly_payment_amount2}}</p>
 						<br><br>
-						<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above): {{additional.monthlyEarlyRetirementReduction}}</p>						<hr>
+						<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above): </p>
+						<hr>
 					{{/ifEquals}}
 				{{/ifNotEquals}}
 			</div>
