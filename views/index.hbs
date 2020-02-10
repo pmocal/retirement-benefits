@@ -37,34 +37,22 @@
 							<span class="math">Option 3</span> is for people who are age of 62 or older or for employees who would like to receive the retirement benefits after they have reached the age of 62. However, you will lose all your contributions.
 						</p>
 						<hr>
-						<span class="math">Retirement Eligible (age >= 52)</span>:
+						<span class="math">Your ESTIMATED Retirement Benefits and Options are as below:</span>
+						<br><br>
+						<h2>OPTION 1: EARLY RETIREMENT</h2>
 						<br><br>
 						<p>Payments will begin on (YYYYMMDD): {{user.retdate_formatted}}</p>
 						<br><br>
 						<p>You will receive total contributions in the amount of: {{user.contrib}}</p>
 						<br><br>
-						<input type="radio" name="option">Option 1a<br>
+						<input type="radio" name="option">Lumpsum:<br>
 						<p>With contributions you will receive a monthly benefit payment in the amount of:</p>
 						<br><br>
-						<input type="radio" name="option">Option 1b<br>
+						<p>You will receive a monthly benefit payment in the amount of (with contributions after age of 62 and above): </p>
+						<input type="radio" name="option">Monthly Payment<br>
 						<p>Without contributions you will receive a monthly benefit payment in the amount of:</p>
-						<hr>
-						<span class="math">Early Retirement (age < 52)</span>:
 						<br><br>
-						<p>Retirement Election Date (YYYYMMDD): {{user.retdate_formatted}}</p>
-						<br><br>
-						<input type="radio" name="option">Option 2<br>
-						<br><br>
-						<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above): {{additional.monthlyEarlyRetirementReduction}}</p>
-						<hr>
-						<span class="math">Late Retirement (age > 62)</span>:
-						<br><br>
-						<p>Date when you become 62 years of age: {{additional.date_when_62}}</p>
-						<br><br>
-						<input type="radio" name="option">Option 3<br>
-						<br><br>
-						<p>Without contributions you will receive a monthly benefit payment in the amount of:</p>
-						<hr>
+						<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above): {{additional.monthlyEarlyRetirementReduction}}</p>						<hr>
 					{{/ifEquals}}
 				{{/ifNotEquals}}
 			</div>
