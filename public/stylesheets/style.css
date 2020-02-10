@@ -86,6 +86,10 @@ form button {
 	text-align: center;
 }
 
+.form4 input {
+	font-weight: bold;
+}
+
 li, a {
 	display: block;
 	transition-duration: 0.5s;

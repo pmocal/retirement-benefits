@@ -19,7 +19,7 @@ exports.index_get = (req, res) => {
 			
 			var monthlyEarlyRetirementReduction = earlyRetirementReduction/12;
 			
-			var reductionFactorMonthly = (req.user.contrib*12)/((-1)*12*returnOfContributions[moment().diff(moment(req.body.dob), 'years', false)])
+			var reductionFactorMonthly = (req.user.contrib*12)/((-1)*12*returnOfContributions[moment().diff(moment(req.user.dob), 'years', false)])
 			
 			var additional = {
 				monthly_payment_amount1: req.user.contrib - monthlyEarlyRetirementReduction,
