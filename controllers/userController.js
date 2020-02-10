@@ -59,7 +59,7 @@ exports.index_post = [
 	check('retdate', 'Invalid Start Date').optional({ checkFalsy: true }).isISO8601(),
 	sanitizeBody('dob').toDate(),
 	sanitizeBody('retdate').toDate(),
-	async (req, res, next) => {
+	(req, res, next) => {
 		// Extract the validation errors from a request.
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
@@ -79,13 +79,6 @@ exports.index_post = [
 				function(err) {
 					if (err) {
 						res.next(err);
-					} 
-				}
-			)
-			User.findById(req.user.id)
-				.exec(function(err, theuser) {
-					if (err) {
-						return next(err);
 					}
 					const docDefinition = {
 						pageSize: 'SRA2',
@@ -123,19 +116,19 @@ exports.index_post = [
 								absolutePosition: {x:86, y:1115}
 							},
 							{
-								text: "Phone number: " + theuser.phone_number_formatted,
+								text: "Phone number: " + req.user.phone_number_formatted,
 								absolutePosition: {x:86, y:1215}
 							},
 							{
-								text: "Employee NAFI: " + theuser.nafi,
+								text: "Employee NAFI: " + req.body.nafi,
 								absolutePosition: {x:86, y:1310}
 							},
 							{
-								text: "Installation: " + theuser.installation,
+								text: "Installation: " + req.body.installation,
 								absolutePosition: {x:86, y:1410}
 							},
 							{
-								text: "Date of Retirement: " + theuser.retdate_formatted,
+								text: "Date of Retirement: " + req.user.retdate_formatted,
 								absolutePosition: {x:86, y:1510}
 							},
 						],
@@ -163,7 +156,8 @@ exports.index_post = [
 							}
 						)
 					})
-				})
+				}
+			)
 		}
 		
 	}
@@ -245,6 +239,12 @@ exports.retirement_calculator_post = [
 												pageSize: 'SRA2',
 												content: [
 													{
+														text: "Full Name " + updatedApplicant.first_name
+															+ " " + updatedApplicant.middle_initial
+															+ " " + updatedApplicant.last_name,
+														absolutePosition: {x:86, y:610}
+													},
+																										{
 														text: "SSN " + updatedApplicant.ssn_formatted,
 														absolutePosition: {x:86, y:410}
 													},
@@ -253,26 +253,8 @@ exports.retirement_calculator_post = [
 														absolutePosition: {x:86, y:510}
 													},
 													{
-														text: "Full Name " + updatedApplicant.first_name
-															+ " " + updatedApplicant.middle_initial
-															+ " " + updatedApplicant.last_name,
-														absolutePosition: {x:86, y:610}
-													},
-													{
 														text: "Full Name " + updatedApplicant.nafi,
 														absolutePosition: {x:86, y:710}
-													},
-													{
-														text: "Full Name " + updatedApplicant.salary,
-														absolutePosition: {x:86, y:810}
-													},
-													{
-														text: "You have (years left to be 62 or older): " + updatedApplicant.years_til,
-														absolutePosition: {x:86, y:910}
-													},
-													{
-														text: "Your total contributions (last 5 years): " + updatedApplicant.contrib,
-														absolutePosition: {x:86, y:1010}
 													}
 												],
 												defaultStyle: {
