@@ -65,24 +65,26 @@
 		{{/ifNotEquals}}
 		{{#ifEquals user.ssn "admin"}}
 			{{> admin_menu}}
-			<div class="col234 row2 boss">
-				<h2>List of Retirement Election Form submitted by users/customers:</h2>
-			</div>
-			<div class="col234 row34 boss">
-				<p>To view a form, right click it and open it in a new tab</p>
-				<ol>
-					{{#each unprocessed}}
-						<li>
-							<a href="{{this.submission_src}}">Retirement Election Form submitted by {{this.last_name}}, {{this.first_name}}</a>
-							<a class="math" href="/user/{{this.id}}">Calculate Retirement</a>
-						</li>
-					{{/each}}
-					{{#each processed}}
-						<li>
-							<a href="{{this.calculation_src}}">Retirement Election Form <span>Processed</span> for {{this.first_name}} {{this.last_name}}</a>
-						</li>
-					{{/each}}
-				</ol>
+			<div class="boss col234 row2345">
+				<div class="col234 row2">
+					<h2>List of Retirement Election Form submitted by users/customers:</h2>
+				</div>
+				<div class="col234 row345">
+					<p>To view a form, right click it and open it in a new tab</p>
+					<ol>
+						{{#each unprocessed}}
+							<li>
+								<a href="{{this.submission_src}}">Retirement Election Form submitted by {{this.last_name}}, {{this.first_name}}</a>
+								<a class="math" href="/user/{{this.id}}">Calculate Retirement</a>
+							</li>
+						{{/each}}
+						{{#each processed}}
+							<li>
+								<a href="{{this.calculation_src}}">Retirement Election Form <span>Processed</span> for {{this.first_name}} {{this.last_name}}</a>
+							</li>
+						{{/each}}
+					</ol>
+				</div>
 			</div>
 		{{/ifEquals}}
 		{{> error_display}}
