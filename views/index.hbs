@@ -4,10 +4,10 @@
 	{{#if user}}
 		{{#ifNotEquals user.ssn "admin"}}
 			{{> myprofile_menu}}
-			<div class="col23 row2">
+			<div class="col234 row2">
 				<h2>Retirement Election Form</h2>
 			</div>
-			<div class="col23 row34 iframe bg">
+			<div class="col234 row34 iframe">
 				{{#ifEquals user.submission_status "not submitted"}}
 					{{> form1}}
 				{{/ifEquals}}
@@ -65,16 +65,16 @@
 		{{/ifNotEquals}}
 		{{#ifEquals user.ssn "admin"}}
 			{{> admin_menu}}
-			<div class="col23 row2">
+			<div class="col234 row2">
 				<h2>List of Retirement Election Form submitted by users/customers:</h2>
 			</div>
-			<div class="col23 row34 bg">
-				<p>Right click and open in new tab to view a form if there are any submissions!</p>
+			<div class="col234 row34">
+				<p>To view a form, right click it and open it in a new tab</p>
 				<ol>
 					{{#each unprocessed}}
 						<li>
 							<a href="{{this.submission_src}}">Retirement Election Form submitted by {{this.last_name}}, {{this.first_name}}</a>
-							<a href="/user/{{this.id}}">Calculate Retirement</a>
+							<a class="math" href="/user/{{this.id}}">Calculate Retirement</a>
 						</li>
 					{{/each}}
 					{{#each processed}}
@@ -87,13 +87,13 @@
 		{{/ifEquals}}
 		{{> error_display}}
 	{{else}}
-		<div class="col23 row2">
+		<div class="col234 row2">
 			<h2>Log In</h2>
 		</div>
-		<div class="col23 row34">
+		<div class="col234 row34">
 			{{> login_form}}
 		</div>
-		<div class="col23 row5">
+		<div class="col234 row5">
 			<p>Don't have an account? <a href="/sign-up">Click here to register/signup</a></p>
 		</div>
 	{{/if}}

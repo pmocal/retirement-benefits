@@ -115,7 +115,7 @@ exports.index_post = [
 								absolutePosition: {x:86, y:1010}
 							},
 							{
-								text: "Date of Birth: " + req.user.dob_formatted,
+								text: "Date of Birth (YYYYMMDD): " + req.user.dob_formatted,
 								absolutePosition: {x:86, y:1115}
 							},
 							{
@@ -131,7 +131,7 @@ exports.index_post = [
 								absolutePosition: {x:86, y:1410}
 							},
 							{
-								text: "Date of Retirement: " + req.user.retdate_formatted,
+								text: "Date of Retirement (YYYYMMDD): " + req.user.retdate_formatted,
 								absolutePosition: {x:86, y:1510}
 							},
 						],
@@ -252,7 +252,7 @@ exports.retirement_calculator_post = [
 														absolutePosition: {x:86, y:410}
 													},
 													{
-														text: "Date of Birth: " + updatedApplicant.dob_formatted,
+														text: "Date of Birth (YYYYMMDD): " + updatedApplicant.dob_formatted,
 														absolutePosition: {x:86, y:510}
 													},
 													{

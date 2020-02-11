@@ -1,11 +1,11 @@
 <body>
 	{{> home_link}}
-	<div class="col23 row1">
+	<div class="col234 row1">
 		<h2>Retirement Calculation Form</h2>
 	</div>
 	{{#ifEquals user.ssn "admin"}}
 		{{> admin_menu}}
-		<div class="col23 row234">
+		<div class="col234 row234">
 			{{#ifEquals applicant.submission_status "processed"}}
 				{{> form3}}
 			{{else}}
