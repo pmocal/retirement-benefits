@@ -36,27 +36,27 @@
 							<br><br>
 							<span class="math">Option 3</span> is for people who are age of 62 or older or for employees who would like to receive the retirement benefits after they have reached the age of 62. However, you will lose all your contributions.
 						</p>
-						<div class="form4:">
+						<div class="form4">
 							<hr>
 							<span class="math">Your ESTIMATED Retirement Benefits and Options are as below:</span>
 							<br><br>
-							<h2>OPTION 1: EARLY RETIREMENT</h2>
+							<h2>EARLY RETIREMENT (Age < 52)</h2>
 							<br><br>
 							<p>Payments will begin on (YYYYMMDD): <span class="math">{{user.retdate_formatted}}</span></p>
 							<br><br>
-							<p>You will receive total contributions in the amount of: <span class="math">${{user.contrib}}</span></p>
+							<input type="radio" name="option"><span class="math">OPTION 1: Lumpsum</span>
 							<br><br>
-							<input type="radio" name="option"><span class="math">Lumpsum:</span>
-							<br>
-							<p>With contributions you will receive a monthly benefit payment in the amount of: <span class="math">${{additional.monthly_payment_amount1}}</span></p>
+							<p>You will receive total contributions in the amount of: <span class="math">${{additional.totContributions}}</span></p>
 							<br><br>
-							<p>You will receive a monthly benefit payment in the amount of (with contributions after age of 62 and above): <span class="math">${{additional.ss_amount1}}</span></p>
+							<p>And you will also receive a monthly benefit payment in the amount of: <span class="math">${{additional.monthlyWContribution}}</span></p>
 							<br><br>
-							<input type="radio" name="option"><span class="math">Monthly Payment:</span>
-							<br>
-							<p>Without contributions you will receive a monthly benefit payment in the amount of: <span class="math">${{additional.monthly_payment_amount2}}</span></p>
+							<p>After 62, you will receive a monthly benefit payment in the amount of: <span class="math">${{additional.lumpsumSixtyTwo}}</span></p>
 							<br><br>
-							<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above): <span class="math">${{additional.ss_amount2}}</span></p>
+							<input type="radio" name="option"><span class="math">OPTION 2: Monthly Payment</span>
+							<br><br>
+							<p>You will also receive a monthly benefit payment in the amount of: <span class="math">${{additional.monthlyWOContribution}}</span></p>
+							<br><br>
+							<p>After 62, you will receive a monthly benefit payment in the amount of: <span class="math">${{additional.monthlySixtyTwo}}</span></p>
 							<hr>
 						</div>
 					{{/ifEquals}}
@@ -65,10 +65,10 @@
 		{{/ifNotEquals}}
 		{{#ifEquals user.ssn "admin"}}
 			{{> admin_menu}}
-			<div class="col234 row2">
+			<div class="col234 row2 boss">
 				<h2>List of Retirement Election Form submitted by users/customers:</h2>
 			</div>
-			<div class="col234 row34">
+			<div class="col234 row34 boss">
 				<p>To view a form, right click it and open it in a new tab</p>
 				<ol>
 					{{#each unprocessed}}
@@ -79,7 +79,7 @@
 					{{/each}}
 					{{#each processed}}
 						<li>
-							<a href="{{this.calculation_src}}">Retirement Election Form by {{this.last_name}}, {{this.first_name}} processed</a>
+							<a href="{{this.calculation_src}}">Retirement Election Form <span>Processed</span> for {{this.first_name}} {{this.last_name}}</a>
 						</li>
 					{{/each}}
 				</ol>

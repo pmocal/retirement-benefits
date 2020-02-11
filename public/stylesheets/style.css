@@ -17,11 +17,12 @@ html, body {
 #instructions {
 	text-align: left;
 	font-family: Arial;
+	font-size: 0.6em;
 }
 
 .math {
 	font-family: Courier;
-	color: black;
+	color: #2c3e50;
 }
 
 iframe {
@@ -47,8 +48,8 @@ h1 {
 }
 
 h2 {
-	font-size: 1.4em;
-	color: #2c3e50;
+	font-size: 1.2em;
+	color: black;
 	font-weight: bold;
 }
 
@@ -71,6 +72,7 @@ form {
 	text-align: right;
 	font-size: 0.8em;
 	padding: 1%;
+	font-family: courier
 }
 
 form * {
@@ -85,6 +87,10 @@ form label {
 
 .form {
 	text-align: center;
+}
+
+.form4 {
+	background-color: #ffff99;
 }
 
 .form4 input {
@@ -128,4 +134,24 @@ ul:hover {
 ul li {
 	clear: both;
 	width: 100%;
+}
+
+.boss {
+	background-color: #ccffcc;
+	padding: 20%;
+}
+
+.erroneous {
+	background-color: salmon;
+	border-radius: 15px;
+	padding: 10%;
+	color: white;
+	font-size: 0.8em;
+	width: 70%;
+}
+
+.signupform {
+	background-color: #99ffcc;
+	border-radius: 5%;
+	padding: 2%;
 }

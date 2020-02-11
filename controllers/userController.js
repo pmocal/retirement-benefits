@@ -24,11 +24,12 @@ exports.index_get = (req, res) => {
 			var ss_amount = 0.025*req.user.ss_award*12*req.user.sick;
 			
 			var additional = {
-				monthly_payment_amount1: req.user.contrib - monthlyEarlyRetirementReduction,
-				monthly_payment_amount2: req.user.contrib - monthlyEarlyRetirementReduction + reductionFactorMonthly,
+				totContributions: req.user.contrib - earlyRetirementReduction,
+				monthlyWContribution: req.user.contrib - monthlyEarlyRetirementReduction,
+				monthlyWOContribution: req.user.contrib - monthlyEarlyRetirementReduction + reductionFactorMonthly,
 				date_when_62: moment(req.user.dob_formatted, "YYYYMMDD").add(62, "years").format("YYYYMMDD"),
-				ss_amount1: req.user.contrib - monthlyEarlyRetirementReduction - ss_amount,
-				ss_amount2: req.user.contrib - monthlyEarlyRetirementReduction + reductionFactorMonthly - ss_amount
+				lumpsumSixtyTwo: req.user.contrib - earlyRetirementReduction - ss_amount,
+				monthlySixtyTwo: req.user.contrib - monthlyEarlyRetirementReduction + reductionFactorMonthly - ss_amount
 			}
 		}
 	}
@@ -86,6 +87,10 @@ exports.index_post = [
 					const docDefinition = {
 						pageSize: 'SRA2',
 						content: [
+							{
+								text: "Form 1",
+								absolutePosition: {x:86, y:310}
+							},
 							{
 								text: "Last Name: " + req.user.last_name,
 								absolutePosition: {x:86, y:410}
@@ -241,6 +246,10 @@ exports.retirement_calculator_post = [
 											const docDefinition = {
 												pageSize: 'SRA2',
 												content: [
+													{
+														text: "Form 2",
+														absolutePosition: {x:86, y:510}
+													},
 													{
 														text: "Full Name: " + updatedApplicant.first_name
 															+ " " + updatedApplicant.middle_initial

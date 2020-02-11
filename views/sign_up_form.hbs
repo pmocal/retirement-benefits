@@ -1,10 +1,11 @@
 <body>
 	{{> home_link}}
 	{{> header}}
-	<div class="col234 row2345">
+	<div class="col234 row2345 signupform">
 		<h2>{{title}}</h2>
 		<form action="" method="POST">
 			<div class="col234 row234">
+				<div class="col23 row23">
 				{{#if user}}
 					<div>
 						<label for="last_name">Last Name</label>
@@ -112,6 +113,7 @@
 						<input name="passwordConfirmation" placeholder="password" type="password" />
 					</div>
 				{{/if}}
+				</div>
 			</div>
 			<div class="col234 row5 form">
 				<button>Sign Up</button>
