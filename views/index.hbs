@@ -7,7 +7,7 @@
 			<div class="col23 row2">
 				<h2>Retirement Election Form</h2>
 			</div>
-			<div class="col23 row34 iframe">
+			<div class="col23 row34 iframe bg">
 				{{#ifEquals user.submission_status "not submitted"}}
 					{{> form1}}
 				{{/ifEquals}}
@@ -50,13 +50,13 @@
 							<br>
 							<p>With contributions you will receive a monthly benefit payment in the amount of: <span class="math">${{additional.monthly_payment_amount1}}</span></p>
 							<br><br>
-							<p>You will receive a monthly benefit payment in the amount of (with contributions after age of 62 and above): <span class="math">$</span></p>
+							<p>You will receive a monthly benefit payment in the amount of (with contributions after age of 62 and above): <span class="math">${{additional.ss_amount1}}</span></p>
 							<br><br>
 							<input type="radio" name="option"><span class="math">Monthly Payment:</span>
 							<br>
 							<p>Without contributions you will receive a monthly benefit payment in the amount of: <span class="math">${{additional.monthly_payment_amount2}}</span></p>
 							<br><br>
-							<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above): <span class="math">$</span></p>
+							<p>You will receive a monthly benefit payment in the amount of (without contributions after age of 62 and above): <span class="math">${{additional.ss_amount2}}</span></p>
 							<hr>
 						</div>
 					{{/ifEquals}}
@@ -68,7 +68,7 @@
 			<div class="col23 row2">
 				<h2>List of Retirement Election Form submitted by users/customers:</h2>
 			</div>
-			<div class="col23 row34">
+			<div class="col23 row34 bg">
 				<p>Right click and open in new tab to view a form if there are any submissions!</p>
 				<ol>
 					{{#each unprocessed}}

@@ -21,11 +21,14 @@ exports.index_get = (req, res) => {
 			
 			var reductionFactorMonthly = (req.user.contrib*12)/((-1)*12*returnOfContributions[moment().diff(moment(req.user.dob), 'years', false)])
 			
+			var ss_amount = 0.025*req.user.ss_award*12*req.user.sick;
+			
 			var additional = {
 				monthly_payment_amount1: req.user.contrib - monthlyEarlyRetirementReduction,
-				monthly_payment_amount2: req.user.contrib - monthlyEarlyRetirementReduction - reductionFactorMonthly,
+				monthly_payment_amount2: req.user.contrib - monthlyEarlyRetirementReduction + reductionFactorMonthly,
 				date_when_62: moment(req.user.dob_formatted, "YYYYMMDD").add(62, "years").format("YYYYMMDD"),
-
+				ss_amount1: req.user.contrib - monthlyEarlyRetirementReduction - ss_amount,
+				ss_amount2: req.user.contrib - monthlyEarlyRetirementReduction + reductionFactorMonthly - ss_amount
 			}
 		}
 	}
@@ -239,21 +242,21 @@ exports.retirement_calculator_post = [
 												pageSize: 'SRA2',
 												content: [
 													{
-														text: "Full Name " + updatedApplicant.first_name
+														text: "Full Name: " + updatedApplicant.first_name
 															+ " " + updatedApplicant.middle_initial
 															+ " " + updatedApplicant.last_name,
 														absolutePosition: {x:86, y:610}
 													},
 																										{
-														text: "SSN " + updatedApplicant.ssn_formatted,
+														text: "SSN: " + updatedApplicant.ssn_formatted,
 														absolutePosition: {x:86, y:410}
 													},
 													{
-														text: "Date of Birth " + updatedApplicant.dob_formatted,
+														text: "Date of Birth: " + updatedApplicant.dob_formatted,
 														absolutePosition: {x:86, y:510}
 													},
 													{
-														text: "Full Name " + updatedApplicant.nafi,
+														text: "Employee NAFI: " + updatedApplicant.nafi,
 														absolutePosition: {x:86, y:710}
 													}
 												],
