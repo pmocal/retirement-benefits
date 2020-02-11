@@ -248,7 +248,7 @@ exports.retirement_calculator_post = [
 												content: [
 													{
 														text: "Form 2",
-														absolutePosition: {x:86, y:510}
+														absolutePosition: {x:86, y:310}
 													},
 													{
 														text: "Full Name: " + updatedApplicant.first_name
