@@ -28,7 +28,7 @@ exports.index_get = (req, res) => {
 				monthlyWContribution: req.user.contrib - monthlyEarlyRetirementReduction,
 				monthlyWOContribution: req.user.contrib - monthlyEarlyRetirementReduction + reductionFactorMonthly,
 				date_when_62: moment(req.user.dob_formatted, "YYYYMMDD").add(62, "years").format("YYYYMMDD"),
-				lumpsumSixtyTwo: req.user.contrib - earlyRetirementReduction - ss_amount,
+				lumpsumSixtyTwo: req.user.contrib - monthlyEarlyRetirementReduction - ss_amount,
 				monthlySixtyTwo: req.user.contrib - monthlyEarlyRetirementReduction + reductionFactorMonthly - ss_amount
 			}
 		}
