@@ -15,7 +15,7 @@ var hbs = require('hbs');
 const Schema = mongoose.Schema;
 
 const mongoDb = "mongodb+srv://" + process.env.DB_USER + ":" + 
-	process.env.DB_PASS + "@" + process.env.DB_HOST + "/retirement-benefits?retryWrites=true&w=majority";
+	process.env.DB_PASS + "@" + process.env.DB_HOST + "/retirement-benefits-fake?retryWrites=true&w=majority";
 mongoose.connect(mongoDb, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
